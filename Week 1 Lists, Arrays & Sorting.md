@@ -28,9 +28,6 @@
        public int videoStitching(int[][] clips, int time) {
            // sort the clips by ending time descending
            Arrays.sort(clips, (a, b) -> {return b[1]-a[1];});
-           if (clips[0][1] < time){
-               return -1;
-           }
            boolean flag = true;
            int cur = 0;
            int result = 0;
@@ -46,6 +43,8 @@
                    }
                }
                // cannot find a clip, return error
+               // case1: all clips searched but still cannot reach the time
+               // case2: some time is not covered in all clips
                if (flag){
                    return -1;                
                }
@@ -56,9 +55,9 @@
    // Time complexity: O(nlogn) for sorting, worst case O(n^2) for the search part.
    // Space complexity: O(1), since no extra space is used.
    ```
-
    
-
+   
+   
 3. [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)(Medium)
 
    ```java
